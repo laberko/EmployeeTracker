@@ -1,0 +1,84 @@
+﻿<Window x:Name="mainWindow" x:Class="EmpTrackerApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EmpTrackerApp"
+        mc:Ignorable="d"
+        Title="Employee Tracker" Height="500" Width="1000" Background="White" UseLayoutRounding="True" SnapsToDevicePixels="True">
+	<Canvas x:Name="canvas">
+		<Grid x:Name="mainGrid" Height="{Binding ActualHeight, ElementName=canvas}" Width="{Binding ActualWidth, ElementName=canvas}">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="40"/>
+				<RowDefinition/>
+				<RowDefinition Height="100" MaxHeight="100" MinHeight="100"/>
+				<RowDefinition Height="24" MaxHeight="24" MinHeight="24"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="2*"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<Grid x:Name="hostsTopGrid" Grid.Row="1">
+				<ListView x:Name="hostsListView" Width="{Binding ActualWidth, ElementName=hostsTopGrid}" Height="{Binding ActualHeight, ElementName=hostsTopGrid}"
+						  IsSynchronizedWithCurrentItem="True" VerticalContentAlignment="Center" Background="{x:Null}"
+						  SelectionChanged="hostsListView_SelectionChanged" UseLayoutRounding="True" TextOptions.TextHintingMode="Animated" TextOptions.TextFormattingMode="Display" Grid.IsSharedSizeScope="True" MinWidth="200">
+					<ListView.View>
+						<GridView AllowsColumnReorder="False">
+							<GridViewColumn/>
+							<GridView.ColumnHeaderContainerStyle>
+								<Style>
+									<Setter Property="FrameworkElement.Visibility" Value="Collapsed"/>
+								</Style>
+							</GridView.ColumnHeaderContainerStyle>
+						</GridView>
+					</ListView.View>
+				</ListView>
+				<ProgressBar x:Name="refreshBar" Height="5" VerticalAlignment="Bottom" Width="{Binding ActualWidth, ElementName=hostsTopGrid}" Background="{x:Null}" BorderThickness="0"/>
+			</Grid>
+			<Grid x:Name="hostsBottomGrid" Margin="0" Grid.Row="2" d:LayoutOverrides="VerticalAlignment">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition MaxWidth="100" MinWidth="100" Width="100"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Button x:Name="refreshHostListButton" Content="Refresh" Margin="10"
+					Click="refreshHostListButton_Click" ClickMode="Press" Cursor="Hand"/>
+			</Grid>
+			<Grid x:Name="windowsTopGrid" Grid.Column="1" Grid.Row="1">
+				<ListView x:Name="windowsListView" Width="{Binding ActualWidth, ElementName=windowsTopGrid}" Height="{Binding ActualHeight, ElementName=windowsTopGrid}"
+						  IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" Background="{x:Null}" SelectionMode="Single" UseLayoutRounding="True" Grid.IsSharedSizeScope="True" TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Animated"
+						  >
+					<ListView.View>
+						<GridView AllowsColumnReorder="False">
+							<GridViewColumn x:Name="nameColumn" Header="Заголовок окна" DisplayMemberBinding="{Binding Name}" Width="350" />
+							<GridViewColumn x:Name="processColumn" Header="Процесс" DisplayMemberBinding="{Binding ProcessName}" Width="100"/>
+						</GridView>
+					</ListView.View>
+					<ListView.ItemContainerStyle>
+						<Style TargetType="ListViewItem">
+							<Setter Property="Focusable" Value="false"/>
+						</Style>
+					</ListView.ItemContainerStyle>
+				</ListView>
+			</Grid>
+			<Grid x:Name="windowsBottomGrid" Margin="0" Grid.Row="2" Grid.Column="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition MaxWidth="100" MinWidth="100" Width="100"/>
+					<ColumnDefinition/>
+					<ColumnDefinition MaxWidth="100" MinWidth="100" Width="100"/>
+					<ColumnDefinition MaxWidth="100" MinWidth="100" Width="100"/>
+				</Grid.ColumnDefinitions>
+				<Button x:Name="getWindowsButton" Content="Refresh" Margin="10"
+				Click="getWindowsButton_Click" ClickMode="Press" Cursor="Hand"/>
+				<TextBox x:Name="setTimerTextBox" Grid.Column="2" Margin="0,0,10,0" TextWrapping="Wrap" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16"/>
+				<Button x:Name="setTimerButton" Content="OK" Grid.Column="3" Margin="10,35" Cursor="Hand" Click="setTimerButton_Click"/>
+				<Label x:Name="timerLabel" Content="Частота обновления (сек):" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="14"/>
+			</Grid>
+			<StatusBar x:Name="statusBar" Grid.Row="3" Grid.ColumnSpan="3" Width="{Binding ActualWidth, ElementName=mainGrid}">
+				<StatusBarItem Background="{x:Null}">
+					<TextBlock x:Name="bottomTextBlock" FontSize="12" TextWrapping="Wrap" VerticalAlignment="Center"/>
+				</StatusBarItem>
+			</StatusBar>
+		</Grid>
+	</Canvas>
+</Window>

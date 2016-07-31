@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/EmpTrackerWCFLibrary" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/EmpTrackerWCFLibrary" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="ClientWindow">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProcessName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ClientWindow" nillable="true" type="tns:ClientWindow" />
+  <xs:complexType name="WindowSummary">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Date" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="TopActiveProcesses" nillable="true" type="q1:ArrayOfKeyValueOfstringint" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="TopActiveWindows" nillable="true" type="q2:ArrayOfKeyValueOfstringint" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WindowSummary" nillable="true" type="tns:WindowSummary" />
+  <xs:complexType name="ArrayOfClientWindow">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ClientWindow" nillable="true" type="tns:ClientWindow" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfClientWindow" nillable="true" type="tns:ArrayOfClientWindow" />
+  <xs:complexType name="ArrayOfWindowSummary">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="WindowSummary" nillable="true" type="tns:WindowSummary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfWindowSummary" nillable="true" type="tns:ArrayOfWindowSummary" />
+</xs:schema>

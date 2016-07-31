@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="557ca6bb-3041-4e83-8375-10c2dba42584" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.tcp://localhost:24816/EmpTrackerService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="f106f4b8-a0d8-434e-b411-4b6345d0f5b9" SourceId="1" SourceUrl="net.tcp://localhost:24816/EmpTrackerService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="b09ae9d3-bfcd-4653-afa0-35614963e362" SourceId="1" SourceUrl="net.tcp://localhost:24816/EmpTrackerService/mex" />
+    <MetadataFile FileName="EmpTrackerWCFLibrary.xsd" MetadataType="Schema" ID="1fb96061-a36e-46b1-a430-539ccbfa7541" SourceId="1" SourceUrl="net.tcp://localhost:24816/EmpTrackerService/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="ef688392-333c-45ff-8b9c-32edf635f2ec" SourceId="1" SourceUrl="net.tcp://localhost:24816/EmpTrackerService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="c83754a8-cbe7-439d-9048-6ec6b4844fed" SourceId="1" SourceUrl="net.tcp://localhost:24816/EmpTrackerService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
