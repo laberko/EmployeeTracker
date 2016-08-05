@@ -10,4 +10,6 @@ System requirements:
 - Windows 7 or later
 - .NET Framework 4.5 or later
 
+[View screenshot](https://raw.githubusercontent.com/laberko/EmployeeTracker/master/2016-08-05_19-35-33.png).
+
 [Download Employee Tracker](https://github.com/laberko/EmployeeTracker/releases/latest).
