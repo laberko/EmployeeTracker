@@ -1,8 +1,8 @@
 # EmployeeTracker
 
-Employee Tracker allows a manager to analyze eployee acitivity by showing current open and active windows. Also Employee tracker summarizes statistics about windows and processes used by employees actively.
+Employee Tracker allows a manager to analyze employee acitivity by showing current open and active windows. Also Employee Tracker summarizes statistics about windows and processes used by employees actively.
 
-Employee Tracker Agent must me installed on emloyees computer. Agent may be installed remotely by a manager. Viewer application discovers Agents over LAN by broadcasting.
+Employee Tracker Agent must be installed on employee's computer. Agent may be installed remotely by a manager. Viewer application discovers Agents over LAN by broadcasting.
 
 Current version has Russian UI only. Internationalization will be included in the next release.
 
