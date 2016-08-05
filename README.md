@@ -1,4 +1,4 @@
-# EmployeeTracker
+# Employee Tracker
 
 Employee Tracker allows a manager to analyze employee acitivity by showing current open and active windows. Also Employee Tracker summarizes statistics about windows and processes used by employees actively.
 
