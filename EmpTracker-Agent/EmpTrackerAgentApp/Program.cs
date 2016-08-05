@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.ServiceModel;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using EmpTrackerWCFLibrary;
 
 namespace EmpTrackerAgentApp
@@ -12,9 +9,10 @@ namespace EmpTrackerAgentApp
 	class Program
 	{
 		static readonly ManualResetEvent QuitEvent = new ManualResetEvent(false);
-		static void Main(string[] args)
+        static readonly string LogPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments), "EmpTracker");
+        static void Main(string[] args)
 		{
-			var logWriter = new WindowLogWriter();
+			var logWriter = new WindowLogging(LogPath);
 			logWriter.LogTimer.Start();
 			using (var host = new ServiceHost(typeof(EmpTrackerWcf)))
 			{

@@ -5,80 +5,116 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmpTrackerApp"
         mc:Ignorable="d"
-        Title="Employee Tracker" Height="500" Width="1000" Background="White" UseLayoutRounding="True" SnapsToDevicePixels="True">
-	<Canvas x:Name="canvas">
-		<Grid x:Name="mainGrid" Height="{Binding ActualHeight, ElementName=canvas}" Width="{Binding ActualWidth, ElementName=canvas}">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="40"/>
-				<RowDefinition/>
-				<RowDefinition Height="100" MaxHeight="100" MinHeight="100"/>
-				<RowDefinition Height="24" MaxHeight="24" MinHeight="24"/>
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition/>
-				<ColumnDefinition Width="2*"/>
-				<ColumnDefinition/>
-			</Grid.ColumnDefinitions>
-			<Grid x:Name="hostsTopGrid" Grid.Row="1">
-				<ListView x:Name="hostsListView" Width="{Binding ActualWidth, ElementName=hostsTopGrid}" Height="{Binding ActualHeight, ElementName=hostsTopGrid}"
+        Title="Employee Tracker" Height="600" Width="1000" Background="White" UseLayoutRounding="True" SnapsToDevicePixels="True">
+    <Canvas x:Name="canvas">
+        <Grid x:Name="mainGrid" Height="{Binding ActualHeight, ElementName=canvas}" Width="{Binding ActualWidth, ElementName=canvas}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+                <RowDefinition Height="60" MaxHeight="60" MinHeight="60"/>
+                <RowDefinition Height="24" MaxHeight="24" MinHeight="24"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth="190"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="hostsTextBlock" TextWrapping="Wrap" Text="Компьютеры" d:LayoutOverrides="Width, Height"
+                       TextAlignment="Center" VerticalAlignment="Center" FontSize="14"/>
+            <Grid x:Name="hostsTopGrid" Grid.Row="1">
+                <ListView x:Name="hostsListView" Width="{Binding ActualWidth, ElementName=hostsTopGrid}" Height="{Binding ActualHeight, ElementName=hostsTopGrid}"
 						  IsSynchronizedWithCurrentItem="True" VerticalContentAlignment="Center" Background="{x:Null}"
-						  SelectionChanged="hostsListView_SelectionChanged" UseLayoutRounding="True" TextOptions.TextHintingMode="Animated" TextOptions.TextFormattingMode="Display" Grid.IsSharedSizeScope="True" MinWidth="200">
-					<ListView.View>
-						<GridView AllowsColumnReorder="False">
-							<GridViewColumn/>
-							<GridView.ColumnHeaderContainerStyle>
-								<Style>
-									<Setter Property="FrameworkElement.Visibility" Value="Collapsed"/>
-								</Style>
-							</GridView.ColumnHeaderContainerStyle>
-						</GridView>
-					</ListView.View>
-				</ListView>
-				<ProgressBar x:Name="refreshBar" Height="5" VerticalAlignment="Bottom" Width="{Binding ActualWidth, ElementName=hostsTopGrid}" Background="{x:Null}" BorderThickness="0"/>
-			</Grid>
-			<Grid x:Name="hostsBottomGrid" Margin="0" Grid.Row="2" d:LayoutOverrides="VerticalAlignment">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition MaxWidth="100" MinWidth="100" Width="100"/>
-					<ColumnDefinition/>
-				</Grid.ColumnDefinitions>
-				<Button x:Name="refreshHostListButton" Content="Refresh" Margin="10"
+						  SelectionChanged="hostsListView_SelectionChanged" UseLayoutRounding="True"
+                          TextOptions.TextHintingMode="Animated" TextOptions.TextFormattingMode="Display" MinWidth="200">
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="False">
+                            <GridView.ColumnHeaderContainerStyle>
+                                <Style>
+                                    <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                                </Style>
+                            </GridView.ColumnHeaderContainerStyle>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <ProgressBar x:Name="refreshBar" Height="5" VerticalAlignment="Bottom" Width="{Binding ActualWidth, ElementName=hostsTopGrid}"
+                             Background="{x:Null}" BorderThickness="0"/>
+            </Grid>
+            <Grid x:Name="hostsBottomGrid" Margin="0" Grid.Row="2" d:LayoutOverrides="VerticalAlignment">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MaxWidth="100" MinWidth="100" Width="100"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="refreshHostListButton" Content="Обновить" Margin="10"
 					Click="refreshHostListButton_Click" ClickMode="Press" Cursor="Hand"/>
-			</Grid>
-			<Grid x:Name="windowsTopGrid" Grid.Column="1" Grid.Row="1">
-				<ListView x:Name="windowsListView" Width="{Binding ActualWidth, ElementName=windowsTopGrid}" Height="{Binding ActualHeight, ElementName=windowsTopGrid}"
-						  IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" Background="{x:Null}" SelectionMode="Single" UseLayoutRounding="True" Grid.IsSharedSizeScope="True" TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Animated"
-						  >
-					<ListView.View>
-						<GridView AllowsColumnReorder="False">
-							<GridViewColumn x:Name="nameColumn" Header="Заголовок окна" DisplayMemberBinding="{Binding Name}" Width="350" />
-							<GridViewColumn x:Name="processColumn" Header="Процесс" DisplayMemberBinding="{Binding ProcessName}" Width="100"/>
-						</GridView>
-					</ListView.View>
-					<ListView.ItemContainerStyle>
-						<Style TargetType="ListViewItem">
-							<Setter Property="Focusable" Value="false"/>
-						</Style>
-					</ListView.ItemContainerStyle>
-				</ListView>
-			</Grid>
-			<Grid x:Name="windowsBottomGrid" Margin="0" Grid.Row="2" Grid.Column="1">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition MaxWidth="100" MinWidth="100" Width="100"/>
-					<ColumnDefinition/>
-					<ColumnDefinition MaxWidth="100" MinWidth="100" Width="100"/>
-					<ColumnDefinition MaxWidth="100" MinWidth="100" Width="100"/>
-				</Grid.ColumnDefinitions>
-				<Button x:Name="getWindowsButton" Content="Refresh" Margin="10"
-				Click="getWindowsButton_Click" ClickMode="Press" Cursor="Hand"/>
-				<TextBox x:Name="setTimerTextBox" Grid.Column="2" Margin="0,0,10,0" TextWrapping="Wrap" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16"/>
-				<Button x:Name="setTimerButton" Content="OK" Grid.Column="3" Margin="10,35" Cursor="Hand" Click="setTimerButton_Click"/>
-				<Label x:Name="timerLabel" Content="Частота обновления (сек):" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="14"/>
-			</Grid>
-			<StatusBar x:Name="statusBar" Grid.Row="3" Grid.ColumnSpan="3" Width="{Binding ActualWidth, ElementName=mainGrid}">
-				<StatusBarItem Background="{x:Null}">
-					<TextBlock x:Name="bottomTextBlock" FontSize="12" TextWrapping="Wrap" VerticalAlignment="Center"/>
-				</StatusBarItem>
-			</StatusBar>
-		</Grid>
-	</Canvas>
+                <Button x:Name="addHostButton" Content="Добавить" Margin="0,10"
+				    Click="addHostButton_Click" ClickMode="Press" Cursor="Hand"
+                        Grid.Column="1" HorizontalAlignment="Left" Width="80"/>
+            </Grid>
+            <TextBlock x:Name="windowsTextBlock" TextWrapping="Wrap" Text="Открытые окна (активное выделено)" TextAlignment="Center"
+                       VerticalAlignment="Center" FontSize="14" d:LayoutOverrides="Width" Grid.Column="1"/>
+            <Grid x:Name="windowsTopGrid" Grid.Column="1" Grid.Row="1">
+                <ListView x:Name="windowsListView" Width="{Binding ActualWidth, ElementName=windowsTopGrid}" Height="{Binding ActualHeight, ElementName=windowsTopGrid}"
+						  IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" Background="{x:Null}" SelectionMode="Single"
+                          UseLayoutRounding="True" Grid.IsSharedSizeScope="True" TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Animated">
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="False">
+                            <GridViewColumn x:Name="nameColumn" Header="Заголовок окна" DisplayMemberBinding="{Binding Name}" Width="270" />
+                            <GridViewColumn x:Name="processColumn" Header="Процесс" DisplayMemberBinding="{Binding ProcessName}" Width="90"/>
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="Focusable" Value="false"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </Grid>
+            <Grid x:Name="windowsBottomGrid" Margin="0" Grid.Row="2" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MaxWidth="100" MinWidth="100" Width="100"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="getWindowsButton" Content="Обновить" Margin="10"
+				Click="getWindowsButton_Click" ClickMode="Press" Cursor="Hand" Grid.RowSpan="2" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="setTimerTextBox" Grid.Column="1" Margin="10,0,10,10" TextWrapping="Wrap" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                         FontSize="14" Grid.Row="1" HorizontalAlignment="Right" Width="80"/>
+                <Button x:Name="setTimerButton" Content="OK" Grid.Column="2" Margin="10,0,10,10" Cursor="Hand" Click="setTimerButton_Click"
+                        Grid.Row="1" IsDefault="True" Width="80" HorizontalAlignment="Left"/>
+                <Label x:Name="setTimerLabel" Content="Частота обновления (сек):" Grid.Column="1" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center"
+                       Grid.ColumnSpan="2"/>
+            </Grid>
+            <TextBlock x:Name="summaryTextBlock1" TextWrapping="Wrap" Text="Статистика по окнам и процессам" TextAlignment="Center"
+                       VerticalAlignment="Center" FontSize="14" Grid.Column="2" d:LayoutOverrides="Width"/>
+            <Grid x:Name="summaryTopGrid" Grid.Column="2" Margin="0" Grid.Row="1">
+                <ScrollViewer x:Name="scrollViewer" Width="{Binding ActualWidth, ElementName=summaryTopGrid}" Height="{Binding ActualHeight, ElementName=summaryTopGrid}"
+                              HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto"
+                              TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Animated" CanContentScroll="True" d:IsHidden="True" Visibility="Hidden">
+                    <TextBlock x:Name="summaryTextBlock" Margin="0" TextWrapping="Wrap" UseLayoutRounding="True" TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Animated"
+                               Height="{Binding ActualHeight, ElementName=scrollViewer}" Width="{Binding ActualWidth, ElementName=scrollViewer}" ScrollViewer.CanContentScroll="True"/>
+                </ScrollViewer>
+                <TextBox x:Name="summaryTextBox" TextWrapping="Wrap" ScrollViewer.CanContentScroll="True"
+                         TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Animated" VerticalScrollBarVisibility="Auto"
+                         Padding="3,0,0,0"/>
+            </Grid>
+            <Grid x:Name="summaryBottomGrid" Grid.Column="2" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MaxWidth="100" MinWidth="100" Width="100"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="getSummaryButton" Content="Обновить" Margin="10"
+                    Click="getSummaryButton_Click" ClickMode="Press" Cursor="Hand"/>
+            </Grid>
+            <StatusBar x:Name="statusBar" Grid.Row="3" Grid.ColumnSpan="3" Width="{Binding ActualWidth, ElementName=mainGrid}">
+                <StatusBarItem Background="{x:Null}">
+                    <TextBlock x:Name="bottomTextBlock" FontSize="12" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                </StatusBarItem>
+            </StatusBar>
+        </Grid>
+    </Canvas>
 </Window>

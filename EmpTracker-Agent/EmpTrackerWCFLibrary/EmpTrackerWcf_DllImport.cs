@@ -6,8 +6,6 @@ namespace EmpTrackerWCFLibrary
 {
 	public partial class EmpTrackerWcf
 	{
-		private delegate bool EnumWindowsProc(IntPtr windowPointer, int lParam);
-
 		[DllImport("USER32.DLL", SetLastError = true)]
 		private static extern bool EnumWindows(EnumWindowsProc enumFunc, int lParam);
 

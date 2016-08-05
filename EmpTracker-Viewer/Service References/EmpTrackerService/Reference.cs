@@ -100,7 +100,7 @@ namespace EmpTrackerApp.EmpTrackerService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DateField;
+        private System.DateTime DateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.Dictionary<string, int> TopActiveProcessesField;
@@ -119,12 +119,12 @@ namespace EmpTrackerApp.EmpTrackerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Date {
+        public System.DateTime Date {
             get {
                 return this.DateField;
             }
             set {
-                if ((object.ReferenceEquals(this.DateField, value) != true)) {
+                if ((this.DateField.Equals(value) != true)) {
                     this.DateField = value;
                     this.RaisePropertyChanged("Date");
                 }

@@ -5,9 +5,10 @@ using System.Text;
 
 namespace EmpTrackerWCFLibrary
 {
-	public partial class EmpTrackerWcf : IEmpTrackerService
+	public partial class EmpTrackerWcf
 	{
-		public ClientWindow[] CurrentWindows()
+		private delegate bool EnumWindowsProc(IntPtr windowPointer, int lParam);
+		internal static ClientWindow[] CurrentWindows()
 		{
 			var activeWindow = GetForegroundWindow();
 			var shellWindow = GetShellWindow();
@@ -36,11 +37,6 @@ namespace EmpTrackerWCFLibrary
 				return true;
 			}, 0);
 			return windows.ToArray();
-		}
-
-		public WindowSummary[] Summary()
-		{
-			return null;
 		}
 	}
 }

@@ -11,7 +11,7 @@
   <xs:element name="ClientWindow" nillable="true" type="tns:ClientWindow" />
   <xs:complexType name="WindowSummary">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Date" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
       <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="TopActiveProcesses" nillable="true" type="q1:ArrayOfKeyValueOfstringint" />
       <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="TopActiveWindows" nillable="true" type="q2:ArrayOfKeyValueOfstringint" />
     </xs:sequence>

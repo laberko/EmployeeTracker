@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.ServiceModel;
+using System.Threading.Tasks;
 
 namespace EmpTrackerWCFLibrary
 {
@@ -10,10 +12,11 @@ namespace EmpTrackerWCFLibrary
 	public interface IEmpTrackerService
 	{
 		[OperationContract]
-		ClientWindow[] CurrentWindows();
+		Task<ClientWindow[]> CurrentWindowsAsync();
 
 		[OperationContract]
-		WindowSummary[] Summary();
+		Task<WindowSummary[]> SummaryAsync();
+
 	}
 	[DataContract]
 	public class ClientWindow
@@ -29,7 +32,7 @@ namespace EmpTrackerWCFLibrary
 	public class WindowSummary
 	{
 		[DataMember]
-		public string Date;
+		public DateTime Date;
 		[DataMember]
 		public Dictionary<string, int> TopActiveWindows;
 		[DataMember]
